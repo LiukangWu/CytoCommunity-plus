@@ -196,6 +196,9 @@ python Step5_BoundaryRefinement.py
 - Smoothing_range: Spatial range (default=50μm) for boundary refinement.
 - InputFolderName: Path to input dataset folder (default="./Step0_Output/"). !!Change it to the original input directory for multi-condition datasets.
 
+#### Demo
+
+We use a single-cell spatial proteomics dataset of healthy mouse spleen as an example input to demonstrate the performance of the CytoCommunity+ algorithm and conducted a comparative analysis with unsupervised CytoCommunity. The results show that CytoCommunity+ achieves comparable performance with CytoCommunity, while enabling automatic cross-sample alignment of TCNs with much lower memory consumption.
 
 
 ## Update Log
