@@ -50,7 +50,7 @@ git clone https://github.com/LiukangWu/CytoCommunity-plus.git
 cd CytoCommunity-plus
 ```
 
-### Set up virtual environment (for Windows)
+### Set up virtual environment for Windows
 
 1. Create a new conda environment using the environment_windows_cpu.yml file (CPU version) and activate it:
 
@@ -74,7 +74,7 @@ cd CytoCommunity-plus
     > install.packages("diceR")
     ```
 
-### Set up virtual environment (for Linux)
+### Set up virtual environment for Linux
 
 1. Create a new conda environment using the environment_linux_cpu.yml file (CPU version) and activate it:
 
