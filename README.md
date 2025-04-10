@@ -17,7 +17,7 @@ To enhance CytoCommunity (https://github.com/huBioinfo/CytoCommunity), we presen
 
 Inspired by histopathology workflows, CytoCommunity+ first hierarchically partitions the large single-cell spatial map into small patches, performs graph construction and weakly supervised TCN learning for each patch, and finally merges results through KNN-based TCN reassignment at segmentation boundaries to ensure TCN spatial continuity. This strategy divides the original sample into patches for TCN learning, achieving **memory efficiency (typical 24G graphics memory is enough)** and also increased sample throughput. These optimizations significantly **enhance the robustness of TCNs and cross-sample alignment performance**.
 
-Furthermore, to make CytoCommunity+ a unified framework that is also suitable for spatial omics datasets with a single condition, pseudo-samples with artificial labels are generated, enabling automatic TCN alignment across real samples via contrastive learning.
+Furthermore, to make CytoCommunity+ a unified framework that is also **applicable for single-condition spatial omics datasets**, pseudo-samples with artificial labels are generated, enabling automatic TCN alignment across real samples via **contrastive learning**.
 
 ## Installation
 
