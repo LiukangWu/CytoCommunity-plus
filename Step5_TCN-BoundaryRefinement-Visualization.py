@@ -147,11 +147,11 @@ for graph_index in range(len(region_name_list)):
             if patch_x_min <= x <= patch_x_max and patch_y_min <= y <= patch_y_max:
                 for boundary_x_min, boundary_x_max, boundary_y_min, boundary_y_max in boundary_ranges:
                     if boundary_x_min == boundary_x_max:  # Vertical _CUT Lines
-                        if abs(x - boundary_x_min) <= smoothing_range and (boundary_y_min - smoothing_range) <= y <= (boundary_y_max + smoothing_range):
+                        if abs(x - boundary_x_min) <= Smoothing_range and (boundary_y_min - Smoothing_range) <= y <= (boundary_y_max + Smoothing_range):
                             target_graph_map_Merged_Smooth.loc[index, "Smooth_Label"] = "1"
                     
                     elif boundary_y_min == boundary_y_max:  # Horizontal _CUT Lines
-                        if abs(y - boundary_y_min) <= smoothing_range and (boundary_x_min - smoothing_range) <= x <= (boundary_x_max + smoothing_range):
+                        if abs(y - boundary_y_min) <= Smoothing_range and (boundary_x_min - Smoothing_range) <= x <= (boundary_x_max + Smoothing_range):
                             target_graph_map_Merged_Smooth.loc[index, "Smooth_Label"] = "1"
 
     smooth_cells_indices = target_graph_map_Merged_Smooth[target_graph_map_Merged_Smooth["Smooth_Label"] == "1"].index
