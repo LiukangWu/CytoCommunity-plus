@@ -87,3 +87,88 @@ Note that the command should be executed in the directory containing the environ
     ```
 
 The whole installation should take around 20 minutes.
+
+
+## Usage
+
+#### Prepare input data
+
+The example input data to CytoCommunity-plus includes **four types of files: (1) cell type label and (2) cell spatial coordinate and (3) graph (sample) label files for each sample/image, as well as (4) an image name list file**. These example input files can be found under the directory "CODEX_SpleenDataset/".
+
+Note that the naming fashion of the four types of files cannot be changed when using your own data. These files should be named as **"[image name]_CellTypeLabel.txt", "[image name]_Coordinates.txt", "[image name]_GraphLabel.txt" and "ImageNameList.txt"**. Here, [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt". The "[image name]_CellTypeLabel.txt" and "[image name]_Coordinates.txt" list cell type names and cell coordinates (tab-delimited x/y) of all cells in an image, respectively. The cell orders should be exactly the same across the two files. Different from unsupervised version, supervised CytoCommunity requires the "[image name]_GraphLabel.txt", where lists an integer (like "0", "1", "2", etc) to describe the graph/sample/image label.
+
+#### Run the following steps in Windows Powershell or Linux Bash shell:
+
+#### 0.Use Step0 to generate pseudo-spatial maps by shuffling cell types in original spatial maps (optional)
+
+This step generates a folder "Step0_Output" containing pseudo-spatial maps created by randomly shuffling cell type labels while maintaining original spatial coordinates. Each pseudo-sample will have corresponding "pseudo" prefixed files alongside the original samples.
+
+```bash
+conda activate CytoCommunity
+python Step0_GeneratePseudoMaps.py
+```
+&ensp;&ensp;**Hyperparameters**
+- InputFolderName: The folder name of your input dataset (must contain original spatial maps).
+
+
+#### 1. Use Step1 to construct cellular spatial graphs and split large images into manageable patches
+This step generates a folder "Step1_Output" containing spatially split patches for each original image along with their corresponding coordinate files, cell type label files, and graph label files, as well as a global "All_Boundary.txt" file that records all splitting boundaries and an "ImagePatchNameList.txt" file that catalogs all generated patches. The recursive splitting process ensures large tissue images are divided into smaller, more manageable patches while maintaining all original cellular information and spatial relationships.
+
+```bash
+python Step1_ConstructCellularSpatialGraphs.py
+```
+&ensp;&ensp;**Hyperparameters**
+- CellPatchNum: Maximum cell count threshold (default=50,000) triggering recursive splitting
+- MinCellCount_Patch: Minimum cell count (default=20) required to keep a generated patch
+- InputFolderName: Path to input dataset folder (default="./Step0_Output/")
+
+#### 2. Use Step2 to construct KNN-based cellular spatial graghs and convert the input data to the standard format required by Torch.
+
+This step generates a folder "Step2_Output" including constructed cellular spatial graphs of all samples/images in your input dataset folder (e.g., /CODEX_SpleenDataset/).
+
+```bash
+python Step2_ConstructCellularSpatialGraphs.py
+```
+&ensp;&ensp;**Hyperparameters**
+- InputFolderName: The folder name of your input dataset.
+- KNN_K: The K value used in the construction of the K nearest neighbor graph (cellular spatial graph) for each sample/image. This value can be empirically set to the integer closest to the square root of the average number of cells in the images in your dataset.
+
+#### 3. Use Step3 to perform soft TCN assignment learning in a weak-supervised fashion.
+
+This step generates a folder "Step3_Output" containing results from multiple independent runs of the supervised TCN learning process. Each run folder includes training loss logs and output matrices (cluster assignment matrix, cluster adjacency matrix, and node mask) for all samples. The model combines graph partitioning (MinCut loss) with graph classification (cross-entropy loss) in an end-to-end training framework.
+
+```bash
+python Step3_TCN-Learning_WeaklySupervised.py
+```
+&ensp;&ensp;**Hyperparameters**
+- Num_TCN: Maximum number of TCNs (default=4) to identify
+- Num_Run: Number of independent training runs (default=10)
+- Num_Epoch: Training epochs per run (default=400)
+- Num_Class: Number of graph classes (default=2)
+- Embedding_Dimension: Feature dimension (default=128)
+- MiniBatchSize: This value is commonly set to be powers of 2 due to efficiency consideration. In the meantime, this value is suggested to be closest to half sizes of the training sets. (default=2)
+- LearningRate: Optimizer learning rate (default=0.001)
+- beta: A weight parameter to balance the MinCut loss used for graph partitioning and the cross-entropy loss used for graph classification. The default value is set to [0.9] due to emphasis on graph partitioning.
+
+#### 4. Use Step4 to perform TCN assignment ensemble.
+
+The results of this step are saved under the "Step4_Output/ImageCollection/" directory. A "TCNLabel_MajorityVoting.csv" file will be generated for each image. Make sure that the diceR package has been installed before Step3.
+
+```bash
+Rscript Step4_TCN-Ensemble.R
+```
+&ensp;&ensp;**Hyperparameters**
+- InputFolderName: The folder name of your input dataset, consistent with Step1.
+
+#### 5. Use Step5 to refine TCN boundaries and generate final visualizations
+
+This step generates a folder "Step5_Output" containing four subfolders with comprehensive results: "TCN_Plot" stores spatial maps colored by identified TCNs (in PNG and PDF formats), "CellRefinement_Plot" shows boundary refinement results, "ResultTable_File" contains detailed spatial data in CSV format, and "CellType_Plot" stores spatial maps colored by original cell type annotations. The step performs boundary smoothing using KNN-based label propagation to improve TCN continuity across patch boundaries.
+
+```bash
+python Step5_BoundaryRefinement.py
+```
+&ensp;&ensp;**Hyperparameters**
+- KNN_K: Number of nearest neighbors (default=50) used for boundary refinement
+- Num_TCN: Maximum number of TCNs (default=4) for consistent coloring
+- Smoothing_range: Spatial range (default=50μm) for boundary refinement
+- InputFolderName: Path to input dataset folder (default="./Step0_Output/")

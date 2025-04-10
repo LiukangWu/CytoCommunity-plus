@@ -18,7 +18,7 @@ sci_palettes.register_cmap("d3_category20")  # register a specific palette for T
 # Hyperparameters
 KNN_K = 50
 Num_TCN = 4
-smoothing_range = 50  # How large (um) for boundary refinement.
+Smoothing_range = 50  # How large (um) for boundary refinement.
 InputFolderName = "./Step0_Output/"  # Change it to the original input folder name for multi-condition datasets.
 
 
