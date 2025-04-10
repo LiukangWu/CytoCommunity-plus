@@ -112,7 +112,7 @@ This file lists cell type names of all cells in an image (sample).
 (3) A cell spatial coordinate file for each image (sample), named as **"[image name]_Coordinates.txt"**. Note that [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt".
 This file lists cell coordinates (tab-delimited x/y) of all cells in an image (sample). The cell orders should be exactly the same with "[image name]_CellTypeLabel.txt".
 
-(4) (Optional, for multi-condition datasets only) A graph label file for each image (sample), named as **"[image name]_GraphLabel.txt"**. Note that [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt".
+(4) **(Optional, for multi-condition datasets only)** A graph label file for each image (sample), named as **"[image name]_GraphLabel.txt"**. Note that [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt".
 This file contains an integer label (e.g., "0", "1", "2", etc) that indicates the condition of each image (sample) in the weakly-supervised learning framework.
 
 Example input files can be found under the directory "CODEX_SpleenDataset/".
