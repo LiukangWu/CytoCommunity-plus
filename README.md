@@ -32,7 +32,7 @@ Furthermore, to make CytoCommunity+ a unified framework that is also **applicabl
 
 ### Hardware requirement 
 
-(Graphics) Memory: 24G or more
+(Graphics) Memory: 24G
 
 Storage: 10GB or more
 
