@@ -21,7 +21,7 @@ Furthermore, to make CytoCommunity+ a unified framework that is also **applicabl
 
 **_In summary, the advantages of CytoCommunity+ include:_**
 
-**_(1) Using significantly less memory for large-scale spatial omics samples with hundreds of thousands of cells._**
+**_(1) Using significantly less memory for large-scale spatial omics samples with millions of cells._**
 
 **_(2) A unified weakly-supervised model applicable for both multi-condition and single-condition datasets._**
 
