@@ -20,9 +20,13 @@ Inspired by histopathology workflows, CytoCommunity+ first hierarchically partit
 Furthermore, to make CytoCommunity+ a unified framework that is also **applicable for single-condition spatial omics datasets**, pseudo-samples with artificial labels are generated, enabling automatic TCN alignment across real samples via **contrastive learning**.
 
 In summary, the **advantages of CytoCommunity+** include:
-(1) Using significantly less memory for large-scale spatial omics samples with hundreds of thousands of cells.
-(2) A unified weakly-supervised model applicable for both multi-condition and single-condition datasets.
-(3) High TCN alignment performance makes it well-suited for large cohort studies.
+
+**(1) Using significantly less memory for large-scale spatial omics samples with hundreds of thousands of cells.**
+
+**(2) A unified weakly-supervised model applicable for both multi-condition and single-condition datasets.**
+
+**(3) High TCN alignment performance makes it well-suited for large cohort studies.**
+
 
 ## Installation
 
