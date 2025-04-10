@@ -49,9 +49,8 @@ Clone this repository and cd into it as below.
 git clone https://github.com/LiukangWu/CytoCommunity-plus.git
 cd CytoCommunity-plus
 ```
-#### For Windows
 
-#### Preparing the virtual environment
+### Set up virtual environment (for Windows)
 
 1. Create a new conda environment using the environment_windows_cpu.yml file (CPU version) and activate it:
 
@@ -75,9 +74,7 @@ cd CytoCommunity-plus
     > install.packages("diceR")
     ```
 
-#### For Linux
-
-#### Preparing the virtual environment 
+### Set up virtual environment (for Linux)
 
 1. Create a new conda environment using the environment_linux_cpu.yml file (CPU version) and activate it:
 
@@ -107,7 +104,7 @@ The whole installation should take around 20 minutes.
 
 ## Usage
 
-#### Prepare input data
+### Prepare input data
 
 The input data to CytoCommunity+ includes **four** types of files (refer to "CODEX_SpleenDataset/"): 
 
@@ -123,7 +120,7 @@ This file lists cell coordinates (tab-delimited x/y) of all cells in an image (s
 This file contains an integer label (e.g., "0", "1", "2", etc) that indicates the condition of each image (sample) in the weakly-supervised learning framework. !!Must begin with 0.
 
 
-#### Ready to run
+### Ready to run
 
 #### Step 0: (Optional, for single-condition datasets only) Use this step to generate pseudo-spatial maps by shuffling cell types in real spatial maps.
 
@@ -196,9 +193,9 @@ python Step5_BoundaryRefinement.py
 - Smoothing_range: Spatial range (default=50μm) for boundary refinement.
 - InputFolderName: Path to input dataset folder (default="./Step0_Output/"). !!Change it to the original input directory for multi-condition datasets.
 
-#### Demo
+### Demo
 
-We use a single-cell spatial proteomics dataset of healthy mouse spleen as an example input to demonstrate the performance of the CytoCommunity+ algorithm and conducted a comparative analysis with unsupervised CytoCommunity. The results show that CytoCommunity+ achieves comparable performance with CytoCommunity, while enabling automatic cross-sample alignment of TCNs with much lower memory consumption.
+Applied to healthy mouse spleen spatial proteomics data, CytoCommunity+ demonstrates performance comparable to unsupervised CytoCommunity while enabling automatic TCN alignment across samples with much lower memory consumption.
 
 
 <div align=center><img src="https://github.com/LiukangWu/CytoCommunity-plus/blob/main/support/demo.png" width="750" height="650" alt="demo"/></div>  
