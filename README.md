@@ -33,7 +33,7 @@ R version: >= 4.0 suggested
 
 Clone this repository and cd into it as below.
 ```
-git clone https://github.com/huBioinfo/CytoCommunity-plus.git
+git clone https://github.com/LiukangWu/CytoCommunity-plus.git
 cd CytoCommunity-plus
 ```
 #### For Windows
@@ -97,7 +97,7 @@ The whole installation should take around 20 minutes.
 
 The example input data to CytoCommunity-plus includes **four types of files: (1) cell type label and (2) cell spatial coordinate and (3) graph (sample) label files for each sample/image, as well as (4) an image name list file**. These example input files can be found under the directory "CODEX_SpleenDataset/".
 
-Note that the naming fashion of the four types of files cannot be changed when using your own data. These files should be named as **"[image name]_CellTypeLabel.txt", "[image name]_Coordinates.txt", "[image name]_GraphLabel.txt" and "ImageNameList.txt"**. Here, [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt". The "[image name]_CellTypeLabel.txt" and "[image name]_Coordinates.txt" list cell type names and cell coordinates (tab-delimited x/y) of all cells in an image, respectively. The cell orders should be exactly the same across the two files. Different from unsupervised version, supervised CytoCommunity requires the "[image name]_GraphLabel.txt", where lists an integer (like "0", "1", "2", etc) to describe the graph/sample/image label.
+Note that the naming fashion of the four types of files cannot be changed when using your own data. These files should be named as **"[image name]_CellTypeLabel.txt", "[image name]_Coordinates.txt", "[image name]_GraphLabel.txt" and "ImageNameList.txt"**. Here, [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt". The "[image name]_CellTypeLabel.txt" and "[image name]_Coordinates.txt" list cell type names and cell coordinates (tab-delimited x/y) of all cells in an image, respectively. The cell orders should be exactly the same across the two files. The "[image name]_GraphLabel.txt" file contains integer labels (e.g., "0", "1", "2") that indicate the class membership of each graph/sample/image in the supervised learning framework.
 
 #### Run the following steps in Windows Powershell or Linux Bash shell:
 
@@ -117,7 +117,7 @@ python Step0_GeneratePseudoMaps.py
 This step generates a folder "Step1_Output" containing spatially split patches for each original image along with their corresponding coordinate files, cell type label files, and graph label files, as well as a global "All_Boundary.txt" file that records all splitting boundaries and an "ImagePatchNameList.txt" file that catalogs all generated patches. The recursive splitting process ensures large tissue images are divided into smaller, more manageable patches while maintaining all original cellular information and spatial relationships.
 
 ```bash
-python Step1_ConstructCellularSpatialGraphs.py
+python Step1_SplitSpatialMaps.py
 ```
 &ensp;&ensp;**Hyperparameters**
 - CellPatchNum: Maximum cell count threshold (default=50,000) triggering recursive splitting
@@ -154,7 +154,7 @@ python Step3_TCN-Learning_WeaklySupervised.py
 
 #### 4. Use Step4 to perform TCN assignment ensemble.
 
-The results of this step are saved under the "Step4_Output/ImageCollection/" directory. A "TCNLabel_MajorityVoting.csv" file will be generated for each image. Make sure that the diceR package has been installed before Step3.
+The results of this step are saved under the "Step4_Output/ImageCollection/" directory. A "TCNLabel_MajorityVoting.csv" file will be generated for each image. Make sure that the diceR package has been installed before Step4.
 
 ```bash
 Rscript Step4_TCN-Ensemble.R
