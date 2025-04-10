@@ -231,4 +231,7 @@ dependencies:
   - yarl=1.18.0=py310h5eee18b_0
   - zlib=1.2.13=h166bdaf_4
   - zstd=1.5.2=h3eb15da_6
+  - pip
+  - pip:
+      - sci-palettes
 
