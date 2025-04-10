@@ -58,8 +58,6 @@ cd CytoCommunity-plus
     conda env create -f environment_windows_gpu.yml
     ```
 
-Note that the command should be executed in the directory containing the environment_windows.yml file.
-
 
 2. Install the diceR package (R has already been included in the requirements) with the following command:
 
@@ -124,7 +122,7 @@ Example input files can be found under the directory "CODEX_SpleenDataset/".
 This step generates a folder "Step0_Output" containing pseudo-spatial maps created by randomly shuffling cell type labels while maintaining original spatial coordinates. Each pseudo-sample will have corresponding "pseudo" prefixed files alongside the original samples.
 
 ```bash
-conda activate CytoCommunity
+conda activate CytoCommunity_gpu   # Or conda activate CytoCommunity_cpu
 python Step0_GeneratePseudoMaps.py
 ```
 &ensp;&ensp;**Hyperparameters**
