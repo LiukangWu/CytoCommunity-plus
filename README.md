@@ -13,6 +13,12 @@
 
 ## Overview
 
+To enhance CytoCommunity (https://github.com/huBioinfo/CytoCommunity), we present CytoCommunity+, **a unified weakly-supervised framework** for identifying and comparing tissue cellular neighborhoods (TCNs) across large-scale spatial omics samples with single or multiple biological conditions. 
+
+Inspired by histopathology workflows, CytoCommunity+ first hierarchically partitions the large single-cell spatial map into small patches, performs graph construction and weakly supervised TCN learning for each patch, and finally merges results through KNN-based TCN reassignment at segmentation boundaries to ensure TCN spatial continuity. This strategy divides the original sample into patches for TCN learning, achieving memory efficiency and also increased sample throughput. These improvements facilitate robust GNN-based TCN learning and cross-sample alignment. 
+
+Furthermore, to make CytoCommunity+ a unified framework that is also suitable for spatial omics datasets with a single condition, pseudo-samples with artificial labels are generated, enabling automatic TCN alignment across real samples via contrastive learning.
+
 ## Installation
 
 ### Hardware requirement 
@@ -43,7 +49,7 @@ cd CytoCommunity-plus
 1. Create a new conda environment using the environment_windows.yml file with the following commands:
 
     ```bash
-    conda env create -f environment_windows.yml
+    conda env create -f environment_windows_cpu.yml
     ```
 
     Or create a new conda environment using the environment_windows_gpu.yml file with the following commands:
@@ -69,7 +75,7 @@ Note that the command should be executed in the directory containing the environ
 1. Create a new conda environment using the environment_linux.yml file and activate it:
 
     ```bash
-    conda env create -f environment_linux.yml
+    conda env create -f environment_linux_cpu.yml
     conda activate CytoCommunity
     ```
 
@@ -97,7 +103,14 @@ The whole installation should take around 20 minutes.
 
 The example input data to CytoCommunity-plus includes **four types of files: (1) cell type label and (2) cell spatial coordinate and (3) graph (sample) label files for each sample/image, as well as (4) an image name list file**. These example input files can be found under the directory "CODEX_SpleenDataset/".
 
-Note that the naming fashion of the four types of files cannot be changed when using your own data. These files should be named as **"[image name]_CellTypeLabel.txt", "[image name]_Coordinates.txt", "[image name]_GraphLabel.txt" and "ImageNameList.txt"**. Here, [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt". The "[image name]_CellTypeLabel.txt" and "[image name]_Coordinates.txt" list cell type names and cell coordinates (tab-delimited x/y) of all cells in an image, respectively. The cell orders should be exactly the same across the two files. The "[image name]_GraphLabel.txt" file contains integer labels (e.g., "0", "1", "2") that indicate the class membership of each graph/sample/image in the supervised learning framework.
+
+Note that the naming fashion of the four types of files cannot be changed when using your own data. These files should be named as **"[image name]_CellTypeLabel.txt", "[image name]_Coordinates.txt", "[image name]_GraphLabel.txt" and "ImageNameList.txt"**. 
+
+Here, [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt". 
+
+The "[image name]_CellTypeLabel.txt" and "[image name]_Coordinates.txt" list cell type names and cell coordinates (tab-delimited x/y) of all cells in an image, respectively. The cell orders should be exactly the same across the two files. 
+
+The "[image name]_GraphLabel.txt" file contains integer labels (e.g., "0", "1", "2") that indicate the class membership of each graph/sample/image in the weakly-supervised learning framework.
 
 #### Run the following steps in Windows Powershell or Linux Bash shell:
 
