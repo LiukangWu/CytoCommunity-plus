@@ -13,7 +13,7 @@
 
 ## Overview
 
-To enhance CytoCommunity (https://github.com/huBioinfo/CytoCommunity), we present CytoCommunity+, **a unified weakly-supervised framework** for identifying and comparing tissue cellular neighborhoods (TCNs) across large-scale spatial omics samples with single or multiple biological conditions. 
+To enhance CytoCommunity (https://github.com/huBioinfo/CytoCommunity), we present CytoCommunity+, **a unified weakly-supervised framework** for identifying and comparing tissue cellular neighborhoods (TCNs or CNs) across large-scale spatial omics samples with single or multiple biological conditions. 
 
 Inspired by histopathology workflows, CytoCommunity+ first hierarchically partitions the large single-cell spatial map into small patches, performs graph construction and weakly supervised TCN learning for each patch, and finally merges results through KNN-based TCN reassignment at segmentation boundaries to ensure TCN spatial continuity. This strategy divides the original sample into patches for TCN learning, achieving memory efficiency and also increased sample throughput. These improvements facilitate robust GNN-based TCN learning and cross-sample alignment. 
 
