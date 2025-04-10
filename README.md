@@ -101,20 +101,25 @@ The whole installation should take around 20 minutes.
 
 #### Prepare input data
 
-The example input data to CytoCommunity-plus includes **four types of files: (1) cell type label and (2) cell spatial coordinate and (3) graph (sample) label files for each sample/image, as well as (4) an image name list file**. These example input files can be found under the directory "CODEX_SpleenDataset/".
+The input data to CytoCommunity+ includes **four types of files: 
 
+(1) An image (sample) name list file, named as **"ImageNameList.txt"**.
 
-Note that the naming fashion of the four types of files cannot be changed when using your own data. These files should be named as **"[image name]_CellTypeLabel.txt", "[image name]_Coordinates.txt", "[image name]_GraphLabel.txt" and "ImageNameList.txt"**. 
+(2) A cell type label file for each image (sample), named as **"[image name]_CellTypeLabel.txt"**. Note that [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt".
+This file lists cell type names of all cells in an image (sample).
 
-Here, [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt". 
+(3) A cell spatial coordinate file for each image (sample), named as **"[image name]_Coordinates.txt"**. Note that [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt".
+This file lists cell coordinates (tab-delimited x/y) of all cells in an image (sample). The cell orders should be exactly the same with "[image name]_CellTypeLabel.txt".
 
-The "[image name]_CellTypeLabel.txt" and "[image name]_Coordinates.txt" list cell type names and cell coordinates (tab-delimited x/y) of all cells in an image, respectively. The cell orders should be exactly the same across the two files. 
+(4) (Optional, for multi-condition datasets only) A graph label file for each image (sample), named as **"[image name]_GraphLabel.txt"**. Note that [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt".
+This file contains an integer label (e.g., "0", "1", "2", etc) that indicates the condition of each image (sample) in the weakly-supervised learning framework.
 
-The "[image name]_GraphLabel.txt" file contains integer labels (e.g., "0", "1", "2") that indicate the class membership of each graph/sample/image in the weakly-supervised learning framework.
+Example input files can be found under the directory "CODEX_SpleenDataset/".
+
 
 #### Run the following steps in Windows Powershell or Linux Bash shell:
 
-#### 0.Use Step0 to generate pseudo-spatial maps by shuffling cell types in original spatial maps (optional)
+#### 0. (optional, for single-condition datasets only) Use Step0 to generate pseudo-spatial maps by shuffling cell types in real spatial maps
 
 This step generates a folder "Step0_Output" containing pseudo-spatial maps created by randomly shuffling cell type labels while maintaining original spatial coordinates. Each pseudo-sample will have corresponding "pseudo" prefixed files alongside the original samples.
 
