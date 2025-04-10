@@ -46,16 +46,18 @@ cd CytoCommunity-plus
 
 #### Preparing the virtual environment
 
-1. Create a new conda environment using the environment_windows.yml file with the following commands:
+1. Create a new conda environment using the environment_windows_cpu.yml file (CPU version) and activate it:
 
     ```bash
     conda env create -f environment_windows_cpu.yml
+    conda activate CytoCommunity_cpu
     ```
 
-    Or create a new conda environment using the environment_windows_gpu.yml file with the following commands:
+    Or create a new conda environment using the environment_windows_gpu.yml file (GPU version) and activate it:
 
     ```bash
     conda env create -f environment_windows_gpu.yml
+    conda activate CytoCommunity_gpu
     ```
 
 
@@ -70,17 +72,18 @@ cd CytoCommunity-plus
 
 #### Preparing the virtual environment 
 
-1. Create a new conda environment using the environment_linux.yml file and activate it:
+1. Create a new conda environment using the environment_linux_cpu.yml file (CPU version) and activate it:
 
     ```bash
     conda env create -f environment_linux_cpu.yml
-    conda activate CytoCommunity
+    conda activate CytoCommunity_cpu
     ```
 
-    Or create a new conda environment using the environment_linux_gpu.yml file with the following commands:
+    Or create a new conda environment using the environment_linux_gpu.yml file (GPU version) and activate it:
 
     ```bash
     conda env create -f environment_linux_gpu.yml
+    conda activate CytoCommunity_gpu
     ```
 
 
@@ -122,7 +125,6 @@ Example input files can be found under the directory "CODEX_SpleenDataset/".
 This step generates a folder "Step0_Output" containing pseudo-spatial maps created by randomly shuffling cell type labels while maintaining original spatial coordinates. Each pseudo-sample will have corresponding "pseudo" prefixed files alongside the original samples.
 
 ```bash
-conda activate CytoCommunity_gpu   # Or conda activate CytoCommunity_cpu
 python Step0_GeneratePseudoMaps.py
 ```
 &ensp;&ensp;**Hyperparameters**
