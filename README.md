@@ -100,7 +100,7 @@ The whole installation should take around 20 minutes.
 
 #### Prepare input data
 
-The input data to CytoCommunity+ includes **four types of files: 
+The input data to CytoCommunity+ includes **four** types of files (refer to "CODEX_SpleenDataset/"): 
 
 **(1)** An image (sample) name list file, named as **"ImageNameList.txt"**.
 
@@ -113,12 +113,10 @@ This file lists cell coordinates (tab-delimited x/y) of all cells in an image (s
 **(4)** **(Optional, for multi-condition datasets only)** A graph label file for each image (sample), named as **"[image name]_GraphLabel.txt"**. Note that [image_name] should be consistent with your customized image names listed in the "ImageNameList.txt".
 This file contains an integer label (e.g., "0", "1", "2", etc) that indicates the condition of each image (sample) in the weakly-supervised learning framework. !!Must begin with 0.
 
-**!!!Example input files can be found under the directory "CODEX_SpleenDataset/".**
-
 
 #### Run the following steps in Windows Powershell or Linux Bash shell:
 
-#### 0. (optional, for single-condition datasets only) Use Step0 to generate pseudo-spatial maps by shuffling cell types in real spatial maps
+#### Step 0. (optional, for single-condition datasets only) Use this step to generate pseudo-spatial maps by shuffling cell types in real spatial maps.
 
 This step generates a folder "Step0_Output" containing pseudo-spatial maps created by randomly shuffling cell type labels while maintaining original spatial coordinates. Each pseudo-sample will have corresponding "pseudo" prefixed files alongside the original samples.
 
@@ -129,7 +127,7 @@ python Step0_GeneratePseudoMaps.py
 - InputFolderName: The folder name of your original input dataset (must contain original spatial maps).
 
 
-#### Step 1. Use this step to construct cellular spatial graphs and split large images into manageable patches
+#### Step 1. Use this step to construct cellular spatial graphs and split large images into manageable patches.
 This step generates a folder "Step1_Output" containing spatially splitted patches for each original image (sample) along with their corresponding coordinate files, cell type label files, and graph label files, as well as a global "All_Boundary.txt" file that records all splitting boundaries and an "ImagePatchNameList.txt" file that catalogs all generated patches. The recursive splitting process ensures large tissue images (samples) are divided into smaller, more manageable patches while maintaining all original cellular information and spatial relationships.
 
 ```bash
