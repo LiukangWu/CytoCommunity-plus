@@ -195,7 +195,7 @@ python Step5_BoundaryRefinement.py
 
 ### Demo
 
-Applied to healthy mouse spleen spatial proteomics data, CytoCommunity+ demonstrates performance comparable to unsupervised CytoCommunity while enabling automatic TCN alignment across samples with much lower memory consumption.
+Applied to healthy mouse spleen spatial proteomics data, CytoCommunity+ demonstrates performance comparable to unsupervised CytoCommunity while enabling **automatic TCN alignment** across samples with **much lower memory consumption**.
 
 
 <div align=center><img src="https://github.com/LiukangWu/CytoCommunity-plus/blob/main/support/demo.png" width="750" height="650" alt="demo"/></div>  
