@@ -1,4 +1,4 @@
-# CytoCommunity-plus 
+# CytoCommunity+
 
 ## Contents
 
