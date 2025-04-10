@@ -114,9 +114,9 @@ This file lists cell coordinates (tab-delimited x/y) of all cells in an image (s
 This file contains an integer label (e.g., "0", "1", "2", etc) that indicates the condition of each image (sample) in the weakly-supervised learning framework. !!Must begin with 0.
 
 
-#### Run the following steps in Windows Powershell or Linux Bash shell:
+#### Ready to run
 
-#### Step 0. (optional, for single-condition datasets only) Use this step to generate pseudo-spatial maps by shuffling cell types in real spatial maps.
+#### Step 0: (Optional, for single-condition datasets only) Use this step to generate pseudo-spatial maps by shuffling cell types in real spatial maps.
 
 This step generates a folder "Step0_Output" containing pseudo-spatial maps created by randomly shuffling cell type labels while maintaining original spatial coordinates. Each pseudo-sample will have corresponding "pseudo" prefixed files alongside the original samples.
 
@@ -127,7 +127,7 @@ python Step0_GeneratePseudoMaps.py
 - InputFolderName: The folder name of your original input dataset (must contain original spatial maps).
 
 
-#### Step 1. Use this step to construct cellular spatial graphs and split large images into manageable patches.
+#### Step 1: Use this step to construct cellular spatial graphs and split large images into manageable patches.
 This step generates a folder "Step1_Output" containing spatially splitted patches for each original image (sample) along with their corresponding coordinate files, cell type label files, and graph label files, as well as a global "All_Boundary.txt" file that records all splitting boundaries and an "ImagePatchNameList.txt" file that catalogs all generated patches. The recursive splitting process ensures large tissue images (samples) are divided into smaller, more manageable patches while maintaining all original cellular information and spatial relationships.
 
 ```bash
@@ -138,7 +138,7 @@ python Step1_SplitSpatialMaps.py
 - MinCellCount_Patch: Minimum cell count (default=20) required to keep a generated patch.
 - InputFolderName: Path to input dataset folder (default="./Step0_Output/"). !!Change it to the original input directory for multi-condition datasets.
 
-#### Step 2. Use this step to construct KNN-based cellular spatial graghs and convert the input data to the standard format required by Torch.
+#### Step 2: Use this step to construct KNN-based cellular spatial graghs and convert the input data to the standard format required by Torch.
 
 This step generates a folder "Step2_Output" including constructed cellular spatial graphs of all patches.
 
@@ -148,7 +148,7 @@ python Step2_ConstructCellularSpatialGraphs.py
 &ensp;&ensp;**Hyperparameters**
 - KNN_K: The K value (default=50; To identify ≥10 TCNs, a value of 20 is suggested) used in the construction of the K nearest neighbor graph (cellular spatial graph) for each patch.
 
-#### Step 3. Use this step to perform soft TCN assignment learning in a weak-supervised fashion.
+#### Step 3: Use this step to perform soft TCN assignment learning in a weak-supervised fashion.
 
 This step generates a folder "Step3_Output" containing results from multiple independent runs of the weakly-supervised TCN learning process. Each run folder includes training loss logs and output matrices (cluster assignment matrix, cluster adjacency matrix, and node mask) for all patches. The model combines graph partitioning (MinCut loss) with graph classification (cross-entropy loss) in an end-to-end training framework.
 
@@ -165,7 +165,7 @@ python Step3_TCN-Learning_WeaklySupervised.py
 - LearningRate: Optimizer learning rate (default=0.001).
 - beta: A weight parameter to balance the MinCut loss used for graph partitioning and the cross-entropy loss used for graph classification. The default value is set to [0.9] due to emphasis on graph partitioning.
 
-#### Step 4. Use this step to perform TCN assignment ensemble.
+#### Step 4: Use this step to perform TCN assignment ensemble.
 
 The results of this step are saved under the "Step4_Output/ImageCollection/" directory. A "TCNLabel_MajorityVoting.csv" file will be generated for each patch.
 
@@ -175,7 +175,7 @@ Rscript Step4_TCN-Ensemble.R
 &ensp;&ensp;**Hyperparameters**
 - NONE
 
-#### Step 5. Use this step to refine TCN membership at segmentation boundaries and generate final visualizations.
+#### Step 5: Use this step to refine TCN membership at segmentation boundaries and generate final visualizations.
 
 This step generates a folder "Step5_Output" containing four subfolders with comprehensive results: "TCN_Plot" storing spatial maps colored by identified TCNs (in PNG and PDF formats), "CellRefinement_Plot" showing boundary refinement results, "ResultTable_File" containing detailed TCN identification results in CSV format, and "CellType_Plot" storing spatial maps colored by original cell type annotations.
 
