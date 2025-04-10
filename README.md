@@ -23,9 +23,7 @@ Furthermore, to make CytoCommunity+ a unified framework that is also suitable fo
 
 ### Hardware requirement 
 
-CPU: i7
-
-Memory: 16G or more
+(Graphics) Memory: 24G or more
 
 Storage: 10GB or more
 
