@@ -200,7 +200,7 @@ python Step5_BoundaryRefinement.py
 
 We use a single-cell spatial proteomics dataset of healthy mouse spleen as an example input to demonstrate the performance of the CytoCommunity+ algorithm and conducted a comparative analysis with unsupervised CytoCommunity. The results show that CytoCommunity+ achieves comparable performance with CytoCommunity, while enabling automatic cross-sample alignment of TCNs with much lower memory consumption.
 
-![Demo](https://github.com/your_username/yLiukangWu/support/demo.png)
+![Demo](https://github.com/LiukangWu/CytoCommunity-plus/main/support/demo.png)
 
 ## Update Log
 
