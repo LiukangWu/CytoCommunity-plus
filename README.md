@@ -118,16 +118,15 @@ This file contains an integer label (e.g., "0", "1", "2", etc) that indicates th
 
 #### Step 0: (Optional, for single-condition datasets only) Use this step to generate pseudo-spatial maps by shuffling cell types in real spatial maps.
 
-This step generates a folder "Step0_Output" containing pseudo-spatial maps created by randomly shuffling cell type labels while maintaining original spatial coordinates. Each pseudo-sample will have corresponding "pseudo" prefixed files alongside the original samples.
+This step generates a folder "Step0_Output" containing pseudo-spatial maps created by randomly shuffling cell type labels while maintaining original spatial coordinates. Each pseudo-sample will have corresponding "pseudo" suffixed files alongside the original samples.
 
 ```bash
 python Step0_GeneratePseudoMaps.py
 ```
 &ensp;&ensp;**Hyperparameters**
-- InputFolderName: The folder name of your original input dataset (must contain original spatial maps).
+- InputFolderName: The folder name of your original input dataset.
 
-
-#### Step 1: Use this step to construct cellular spatial graphs and split large images into manageable patches.
+#### Step 1: Use this step to split large spatial maps into small manageable patches.
 This step generates a folder "Step1_Output" containing spatially splitted patches for each original image (sample) along with their corresponding coordinate files, cell type label files, and graph label files, as well as a global "All_Boundary.txt" file that records all splitting boundaries and an "ImagePatchNameList.txt" file that catalogs all generated patches. The recursive splitting process ensures large tissue images (samples) are divided into smaller, more manageable patches while maintaining all original cellular information and spatial relationships.
 
 ```bash
@@ -138,7 +137,7 @@ python Step1_SplitSpatialMaps.py
 - MinCellCount_Patch: Minimum cell count (default=20) required to keep a generated patch.
 - InputFolderName: Path to input dataset folder (default="./Step0_Output/"). !!Change it to the original input directory for multi-condition datasets.
 
-#### Step 2: Use this step to construct KNN-based cellular spatial graghs and convert the input data to the standard format required by Torch.
+#### Step 2: Use this step to construct KNN-based cellular spatial graghs of all patches and convert them to the standard format required by Torch.
 
 This step generates a folder "Step2_Output" including constructed cellular spatial graphs of all patches.
 
@@ -148,7 +147,7 @@ python Step2_ConstructCellularSpatialGraphs.py
 &ensp;&ensp;**Hyperparameters**
 - KNN_K: The K value (default=50; To identify ≥10 TCNs, a value of 20 is suggested) used in the construction of the K nearest neighbor graph (cellular spatial graph) for each patch.
 
-#### Step 3: Use this step to perform soft TCN assignment learning in a weak-supervised fashion.
+#### Step 3: Use this step to perform soft TCN assignment learning in a weakly-supervised fashion.
 
 This step generates a folder "Step3_Output" containing results from multiple independent runs of the weakly-supervised TCN learning process. Each run folder includes training loss logs and output matrices (cluster assignment matrix, cluster adjacency matrix, and node mask) for all patches. The model combines graph partitioning (MinCut loss) with graph classification (cross-entropy loss) in an end-to-end training framework.
 
