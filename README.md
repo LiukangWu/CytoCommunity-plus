@@ -40,10 +40,10 @@ cd CytoCommunity-plus
 
 #### Preparing the virtual environment
 
-1. Create a new conda environment using the environment.yml file or the requirements.txt file with one of the following commands:
+1. Create a new conda environment using the environment_windows.yml file with the following commands:
 
     ```bash
-    conda env create -f environment.yml
+    conda env create -f environment_windows.yml
     ```
 
     Or create a new conda environment using the environment_windows_gpu.yml file with the following commands:
@@ -52,7 +52,7 @@ cd CytoCommunity-plus
     conda env create -f environment_windows_gpu.yml
     ```
 
-Note that the command should be executed in the directory containing the environment.yml file. And if you use the .txt file, please convert it to the UTF-8 format.
+Note that the command should be executed in the directory containing the environment_windows.yml file.
 
 
 2. Install the diceR package (R has already been included in the requirements) with the following command:
