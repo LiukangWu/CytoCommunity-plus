@@ -213,3 +213,6 @@ Yuxuan Hu (huyuxuan@xidian.edu.cn)
 
 
 ## Citation
+
+Yuxuan Hu, Jiazhen Rong, Yafei Xu, Runzhi Xie, Jacqueline Peng, Lin Gao, Kai Tan. Unsupervised and supervised discovery of tissue cellular neighborhoods from cell phenotypes. **Nature Methods**, 2024, 21:267–278 https://doi.org/10.1038/s41592-023-02124-2
+
